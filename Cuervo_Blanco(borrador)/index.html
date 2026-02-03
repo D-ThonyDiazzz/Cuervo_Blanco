@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuervo Blanco Editores - Biblioteca Digital</title>
+    
+    <!-- Favicon personalizado (opcional - agrega tu logo) -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PDF.js para renderizar PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    
+    <!-- ePub.js para renderizar ePubs -->
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+               <i class="fas fa-crow"></i>
+                <div class="logo-text">
+                    <h1>Cuervo Blanco</h1>
+                    <span></span>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active">Biblioteca</a>
+                <a href="#" class="nav-link"></a>
+                <a href="#" class="nav-link"></a>
+                <a href="#" class="nav-link">Mi Cuenta</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="hero-title">Descubre un Mundo de Conocimiento</h2>
+            <p class="hero-subtitle">Tu Biblioteca Virtual</p>
+        </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar libros por título, autor o tema...">
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" data-category="todos">
+                    <i class="fas fa-th"></i> Todos
+                </button>
+                <button class="filter-btn" data-category="literatura">
+                    <i class="fas fa-feather"></i> Literatura
+                </button>
+                <button class="filter-btn" data-category="historia">
+                    <i class="fas fa-landmark"></i> Historia
+                </button>
+                <button class="filter-btn" data-category="ciencia">
+                    <i class="fas fa-flask"></i> Ciencia
+                </button>
+                <button class="filter-btn" data-category="infantil">
+                    <i class="fas fa-child"></i> Infantil
+                </button>
+                <button class="filter-btn" data-category="educacion">
+                    <i class="fas fa-graduation-cap"></i> Educación
+                </button>
+                <button class="filter-btn" data-category="arte">
+                    <i class="fas fa-palette"></i> Arte
+                </button>
+            </div>
+
+            <div class="results-info">
+                <span id="resultsCount">Mostrando libros</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Grid -->
+    <section class="books-section">
+        <div class="container">
+            <div class="books-grid" id="booksGrid">
+                <!-- Los libros se generarán dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Reader Modal -->
+    <div class="modal" id="bookModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="reader-container">
+                <div class="book-info-header">
+                    <h3 id="readerBookTitle">Título del Libro</h3>
+                    <p id="readerBookAuthor">Autor</p>
+                </div>
+
+                <!-- Contenedor del lector con efecto libro abierto -->
+                <div class="book-3d-container">
+                    <div class="book-viewer">
+                        <!-- Botón página anterior (izquierda) -->
+                        <button class="page-flip-btn left-flip" id="prevPageFlip">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+
+                        <!-- Libro abierto con dos páginas -->
+                        <div class="book-spread">
+                            <!-- Página izquierda -->
+                            <div class="book-page-container left-page-container">
+                                <canvas id="leftPageCanvas" class="pdf-page-canvas"></canvas>
+                                <div class="page-shadow left-shadow"></div>
+                            </div>
+
+                            <!-- Lomo central del libro -->
+                            <div class="book-spine"></div>
+
+                            <!-- Página derecha -->
+                            <div class="book-page-container right-page-container">
+                                <canvas id="rightPageCanvas" class="pdf-page-canvas"></canvas>
+                                <div class="page-shadow right-shadow"></div>
+                            </div>
+                        </div>
+
+                        <!-- Botón página siguiente (derecha) -->
+                        <button class="page-flip-btn right-flip" id="nextPageFlip">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Indicador de carga -->
+                    <div class="pdf-loader" id="pdfLoader">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Cargando libro...</p>
+                    </div>
+                </div>
+
+                <!-- Controles inferiores -->
+                <div class="reader-controls">
+                    <button class="control-btn" id="prevPage">
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </button>
+                    <div class="page-info">
+                        <span class="page-counter" id="pageCounter">Página 1 de 1</span>
+                        <input type="number" id="pageInput" class="page-input" min="1" placeholder="Ir a página">
+                    </div>
+                    <button class="control-btn" id="nextPage">
+                        Siguiente <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
